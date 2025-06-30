@@ -1,0 +1,27 @@
+# Core Django Framework
+django==4.2.7
+
+# Web Framework Dependencies
+jinja2==3.1.2
+
+# Image Processing
+pillow==10.1.0
+
+# PDF Generation
+reportlab>=3.6.0
+
+# Machine Learning & AI
+numpy>=1.24.0
+
+# Development & Debugging
+django-debug-toolbar>=4.0.0
+
+# Security
+django-cors-headers>=4.0.0
+
+# Utilities
+python-dateutil>=2.8.0
+
+# Note: This project uses CipherDepth AI assistant with Reinforcement Learning
+# Created by Noaman Ayub - https://www.linkedin.com/in/noamanayub
+# GitHub: https://github.com/noamanayub

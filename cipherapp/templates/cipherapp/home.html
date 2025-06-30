@@ -1,0 +1,80 @@
+{% extends "cipherapp/base.html" %}
+{% load static %}
+
+{% block title %}CipherDepth - Home{% endblock %}
+
+{% block content %}
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page active">
+        <!-- Sidebar Overlay for Mobile -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            {% include "cipherapp/sidebar.html" %}
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Search Container -->
+                <div class="search-container" id="searchContainer">
+                    <div class="search-wrapper">
+                        <div class="search-input-container">
+                            <input type="text" class="search-input" id="searchInput" placeholder="Search through your conversations...">
+                            <button class="search-perform-btn" id="searchPerformBtn" title="Search">🔍</button>
+                        </div>
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                </div>
+                
+                <!-- Welcome Screen -->
+                {% include "cipherapp/welcome.html" %}
+                
+                <!-- Chat Area -->
+                <div class="chat-area hidden" id="chatArea">
+                    <div class="messages-container" id="messagesContainer">
+                        <!-- Messages will be added here dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Chat Input -->
+                {% include "cipherapp/chat_input.html" %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="delete-modal" id="deleteModal">
+        <div class="delete-modal-content">
+            <h3>Delete Message</h3>
+            <p>Are you sure you want to delete this message? This action cannot be undone.</p>
+            <div class="delete-modal-actions">
+                <button class="delete-confirm-btn" id="deleteConfirmBtn">Delete</button>
+                <button class="delete-cancel-btn" id="deleteCancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'home.js' %}?v=20250628-edit-regenerate-final"></script>
+    <script>
+        // Configure API endpoints
+        window.API_BASE = "{% url 'chat_api' %}";
+        window.CHAT_HISTORY_URL = "{% url 'chat_history' %}";
+        window.DELETE_CHAT_URL = "{% url 'delete_chat_session' %}";
+        window.FEEDBACK_API_URL = "{% url 'feedback_api' %}";
+        window.LOGOUT_URL = "{% url 'logout' %}";
+        
+        // CSRF token for AJAX requests
+        window.CSRF_TOKEN = "{{ csrf_token }}";
+        
+        // Debug information
+        console.log('🔧 API Configuration:');
+        console.log('📡 API_BASE:', window.API_BASE);
+        console.log('📜 CHAT_HISTORY_URL:', window.CHAT_HISTORY_URL);
+        console.log('🗑️ DELETE_CHAT_URL:', window.DELETE_CHAT_URL);
+        console.log('👍 FEEDBACK_API_URL:', window.FEEDBACK_API_URL);
+        console.log('👋 LOGOUT_URL:', window.LOGOUT_URL);
+        console.log('🛡️ CSRF_TOKEN:', window.CSRF_TOKEN ? 'Present' : 'Missing');
+    </script>
+{% endblock %}

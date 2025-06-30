@@ -1,0 +1,70 @@
+{% load static %}
+<!-- Sidebar Component -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+            <h2 class="sidebar-title">CipherDepth</h2>
+        </div>
+        <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+            <span class="icon">☰</span>
+        </button>
+    </div>
+    
+    <div class="sidebar-menu">
+        <button class="menu-item active" id="newChatBtn" title="New Chat">
+            <span class="icon">✨</span>
+            <span class="text">New Chat</span>
+        </button>
+        
+        <button class="menu-item" id="searchBtn" title="Search Messages">
+            <span class="icon">🔍</span>
+            <span class="text">Search</span>
+        </button>
+        
+        <button class="menu-item" id="historyBtn" title="Chat History">
+            <span class="icon">📄</span>
+            <span class="text">Chat History</span>
+        </button>
+        
+        {% if chat_sessions %}
+            <div class="chat-history" id="chatHistoryContainer">
+                <h4><span class="icon">💬</span><span class="text">Recent Chats</span></h4>
+                <div class="chat-history-scroll">
+                    {% for session in chat_sessions %}
+                    <div class="chat-item-wrapper">
+                        <button class="chat-item" data-session-id="{{ session.id }}" title="{{ session.title }}">
+                            <span class="icon">�</span>
+                            <span class="chat-title">{{ session.title|truncatechars:25 }}</span>
+                        </button>
+                        <button class="chat-delete-btn" data-session-id="{{ session.id }}" title="Delete this chat">
+                            <span class="icon">✕</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="chat-history hidden" id="chatHistoryContainer">
+                <h4><span class="icon">💬</span><span class="text">Recent Chats</span></h4>
+                <div class="chat-history-scroll">
+                    <p class="no-chats">No chat history yet. Start a conversation!</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="sidebar-footer">
+        <div class="user-info">
+            <span class="icon">👤</span>
+            <span class="user-name text">{{ user.first_name|default:user.username }}</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+            <span class="icon">☀️</span>
+            <span class="text">{{ profile.theme_preference|title }} Mode</span>
+        </button>
+        <button class="menu-item" id="logoutBtn" title="Logout">
+            <span class="icon">🚪</span>
+            <span class="text">Logout</span>
+        </button>
+    </div>
+</div>

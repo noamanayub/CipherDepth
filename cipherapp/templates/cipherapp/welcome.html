@@ -1,0 +1,13 @@
+<!-- Welcome Screen Component -->
+{% load static %}
+<div class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-content">
+        <div class="logo-container">
+            <div class="logo welcome-logo">
+                <img src="{% static 'img/logo.png' %}" alt="CipherDepth Logo" class="logo-img">
+            </div>
+        </div>
+        <h1>Welcome to CipherDepth, {{ user.first_name|default:user.username }}!</h1>
+        <p>Start a new conversation or continue from your history.</p>
+    </div>
+</div>
